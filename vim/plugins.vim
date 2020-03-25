@@ -4,7 +4,7 @@
 execute pathogen#infect()
 execute pathogen#helptags()
 
-source nerdtree.vim
-source airline.vim
-source ctrlp.vim
-source fugitive.vim
+source ~/.vim/nerdtree.vim
+source ~/.vim/airline.vim
+source ~/.vim/ctrlp.vim
+source ~/.vim/fugitive.vim

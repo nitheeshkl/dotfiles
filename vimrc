@@ -1,12 +1,12 @@
 " KLN vim configs
 "
-source general.vim
-source colors.vim
-source spaces.vim
-source indents.vim
-source ui_config.vim
-source searching.vim
-source folding.vim
-source keybindings.vim
-source backups.vim
-source plugins.vim
+source ~/.vim/general.vim
+source ~/.vim/colors.vim
+source ~/.vim/spaces.vim
+source ~/.vim/indents.vim
+source ~/.vim/ui_config.vim
+source ~/.vim/searching.vim
+source ~/.vim/folding.vim
+source ~/.vim/keybindings.vim
+source ~/.vim/backups.vim
+source ~/.vim/plugins.vim
