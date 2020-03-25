@@ -18,3 +18,8 @@ elseif has("clipboard")
     set clipboard=unnamed
 endif
 
+" Enable file type detection. Use the default filetype settings.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin on
+filetype indent on
+
