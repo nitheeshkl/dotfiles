@@ -6,3 +6,6 @@ set autowrite    " write a modified buffer on each :next, ...
 set backspace=indent,eol,start " backspacing over everything in insert mode
 set browsedir=current " which directory to use for the file browser
 set popt=left:8pc,right:3pc " print options
+set history=500 " how many lines of history vim has to remember
+set magic " turn on magic for regular expression matching
+set ffs=unix,dos,mac " use unix as the standard file type
