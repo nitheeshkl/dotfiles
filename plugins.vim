@@ -6,3 +6,4 @@ execute pathogen#helptags()
 
 source nerdtree.vim
 source airline.vim
+source ctrlp.vim
