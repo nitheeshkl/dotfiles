@@ -1,3 +1,4 @@
+let mapleader="," " leader is a comma
 syntax enable    " enable syntax processing
 set nocompatible " use vim settings instead of vi settings.
 set autoindent   " copy indent from current line
@@ -16,4 +17,3 @@ set wildignore=*.bak,*.o,*.e,*~ " ignore these file extensions for wildmenu
 set backspace=indent,eol,start " backspacing over everything in insert mode
 set browsedir=current " which directory to use for the file browser
 set popt=left:8pc,right:3pc " print options
-
