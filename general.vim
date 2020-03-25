@@ -9,3 +9,4 @@ set popt=left:8pc,right:3pc " print options
 set history=500 " how many lines of history vim has to remember
 set magic " turn on magic for regular expression matching
 set ffs=unix,dos,mac " use unix as the standard file type
+set noswapfile " disable swapfile
