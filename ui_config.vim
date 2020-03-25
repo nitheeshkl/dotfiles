@@ -43,3 +43,5 @@ set textwidth=80 " max text width per line
 " set the color of the textwidth column
 " highlight ColorColumn ctermbg=darkgrey
 " TODO: toggle textwidth column based on file and keymapping
+
+set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
