@@ -57,7 +57,7 @@ set tm=500
 
 " Text rendering options
 set display+=lastline " always try to show a paragraph's last line
-set encoding=utf-8 " use an encoding that supports unicode
+set encoding=UTF-8 " use an encoding that supports unicode
 set linebreak " avoid wrapping a line in the middle of a word
 set showbreak=… " show ellipsis at breaking
 set scrolloff=1 " the number of screen line ot keep above and below the cursor

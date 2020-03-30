@@ -3,7 +3,10 @@
 call plug#begin('plugins')
 
 " Nerdtree
-Plug 'preservim/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Airline
 Plug 'vim-airline/vim-airline'
