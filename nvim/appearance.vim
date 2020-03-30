@@ -34,14 +34,15 @@ if &term =~ '256color'
     set t_ut=
 endif
 
+" 24 bit color support is configured in the onedark colorscheme plugin.
 " enable 24 bit color support if supported
-if (has("termguicolors"))
-    if (!(has("nvim")))
-        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    endif
-    set termguicolors
-endif
+"if (has("termguicolors"))
+"    if (!(has("nvim")))
+"        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"    endif
+"    set termguicolors
+"endif
 
 " highlight conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'

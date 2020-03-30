@@ -42,3 +42,5 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:webdevicons_enable_airline_tabline = 1
 " adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
+
+let g:airline_theme='onedark'

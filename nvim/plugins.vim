@@ -17,8 +17,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'junegunn/gv.vim'
 
+" Color themes
+Plug 'joshdick/onedark.vim'
+
 call plug#end()
 
+source ~/.config/nvim/onedark.vim
 source ~/.config/nvim/nerdtree.vim
 source ~/.config/nvim/airline.vim
 source ~/.config/nvim/fugitive.vim
