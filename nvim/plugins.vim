@@ -31,6 +31,11 @@ Plug 'tpope/vim-endwise'
 
 " detect indent style (tabs vs. spaces)
 Plug 'tpope/vim-sleuth'
+
+" Distraction free writing
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
@@ -38,3 +43,5 @@ source ~/.config/nvim/nerdtree.vim
 source ~/.config/nvim/airline.vim
 source ~/.config/nvim/fugitive.vim
 source ~/.config/nvim/startify.vim
+source ~/.config/nvim/goyo.vim
+source ~/.config/nvim/limelight.vim
