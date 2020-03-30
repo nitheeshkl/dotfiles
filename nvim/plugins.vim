@@ -39,6 +39,9 @@ Plug 'junegunn/limelight.vim'
 " Context aware pasting with 'p' and 'P'
 Plug 'sickill/vim-pasta'
 
+" additional vim c++ syntax highlighting
+Plug 'octol/vim-cpp-enhanced-highlight'
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
@@ -48,3 +51,4 @@ source ~/.config/nvim/fugitive.vim
 source ~/.config/nvim/startify.vim
 source ~/.config/nvim/goyo.vim
 source ~/.config/nvim/limelight.vim
+source ~/.config/nvim/enhanced_cpp.vim
