@@ -20,6 +20,9 @@ Plug 'junegunn/gv.vim'
 " Color themes
 Plug 'joshdick/onedark.vim'
 
+" Polyglot for syntax and indentation
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
