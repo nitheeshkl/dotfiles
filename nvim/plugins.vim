@@ -23,9 +23,13 @@ Plug 'joshdick/onedark.vim'
 " Polyglot for syntax and indentation
 Plug 'sheerun/vim-polyglot'
 
+" Fancy startup screen
+Plug 'mhinz/vim-startify'
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
 source ~/.config/nvim/nerdtree.vim
 source ~/.config/nvim/airline.vim
 source ~/.config/nvim/fugitive.vim
+source ~/.config/nvim/startify.vim
