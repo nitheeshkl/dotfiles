@@ -1,9 +1,9 @@
 " Plugins configurations
 
-call plug#begin('plugins')
+call plug#begin('~/.config/nvim/plugins')
 
 " Nerdtree
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -19,6 +19,6 @@ Plug 'junegunn/gv.vim'
 
 call plug#end()
 
-source nerdtree.vim
-source airline.vim
-source fugitive.vim
+source ~/.config/nvim/nerdtree.vim
+source ~/.config/nvim/airline.vim
+source ~/.config/nvim/fugitive.vim

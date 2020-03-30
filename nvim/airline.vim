@@ -37,3 +37,8 @@ let g:airline_symbols.whitespace = 'Ξ'
 "let g:airline_symbols.readonly = ''
 "let g:airline_symbols.linenr = '☰'
 "let g:airline_symbols.maxlinenr = ''
+
+" adding to vim-airline's tabline
+let g:webdevicons_enable_airline_tabline = 1
+" adding to vim-airline's statusline
+let g:webdevicons_enable_airline_statusline = 1

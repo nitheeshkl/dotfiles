@@ -1,7 +1,7 @@
 " NerdTree plugin configs
 
-" autocmd VimEnter * NERDTree
-" autocmd VimEnter * wincmd p
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=0
 let NERDTreeQuitOnOpen=0
@@ -33,6 +33,9 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 1
 let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
 let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
 let NERDTreeNodeDelimiter = "\u263a" " smiley face
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+" whether or not to show the nerdtree brackets around flags
+let g:webdevicons_conceal_nerdtree_brackets = 1
 
 augroup nerdtree
     autocmd!
@@ -41,8 +44,8 @@ augroup nerdtree
 augroup END
 
 let NERDTreeShowHidden=1
-let NERDTreeDirArrowExpandable = '▷'
-let NERDTreeDirArrowCollapsible = '▼'
+" let NERDTreeDirArrowExpandable = '▷'
+" let NERDTreeDirArrowCollapsible = '▼'
 let g:NERDTreeIndicatorMapCustom = {
 \ 'Modified'  : '✹',
 \ 'Staged'    : '✚',
