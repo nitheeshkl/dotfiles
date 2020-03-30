@@ -7,3 +7,4 @@ source spaces.vim
 source searching.vim
 source keybindings.vim
 source autogroups.vim
+source plugins.vim
