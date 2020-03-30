@@ -36,6 +36,9 @@ Plug 'tpope/vim-sleuth'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
+" Context aware pasting with 'p' and 'P'
+Plug 'sickill/vim-pasta'
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
