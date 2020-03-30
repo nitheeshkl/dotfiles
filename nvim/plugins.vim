@@ -26,6 +26,11 @@ Plug 'sheerun/vim-polyglot'
 " Fancy startup screen
 Plug 'mhinz/vim-startify'
 
+" add end, endif, etc. automatically
+Plug 'tpope/vim-endwise'
+
+" detect indent style (tabs vs. spaces)
+Plug 'tpope/vim-sleuth'
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
