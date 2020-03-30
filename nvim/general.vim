@@ -1,4 +1,4 @@
-syntax enable    " enable syntax processing
+"syntax enable    " enable syntax processing
 set nocompatible " use vim settings instead of vi settings.
 set autoread     " read open files again when changed outside vim
 set autowrite    " write a modified buffer on each :next, ...
@@ -25,6 +25,5 @@ endif
 
 " Enable file type detection. Use the default filetype settings.
 " Also load indent files, to automatically do language-dependent indenting.
-filetype plugin on
-filetype indent on
-
+"filetype plugin on
+"filetype indent on

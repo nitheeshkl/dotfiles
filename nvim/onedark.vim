@@ -15,5 +15,5 @@ if (empty($TMUX))
 endif
 
 let g:onedark_terminal_italics=1
-syntax on
+"syntax on
 colorscheme onedark
