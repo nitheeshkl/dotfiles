@@ -10,7 +10,21 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
-map <silent> <C-n> :NERDTreeToggle<CR>
+
+" Keybindings
+"map <silent> <C-n> :NERDTreeToggle<CR>
+" Toggle NERDTree
+function! ToggleNerdTree()
+    if @% != "" && @% !~ "Startify" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
+        :NERDTreeFind
+    else
+        :NERDTreeToggle
+    endif
+endfunction
+" toggle nerd tree
+nmap <silent> <leader>n :call ToggleNerdTree()<cr>
+" find the current file in nerdtree without needing to reload the drawer
+nmap <silent> <leader>y :NERDTreeFind<cr>
 
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
