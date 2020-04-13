@@ -42,6 +42,9 @@ Plug 'sickill/vim-pasta'
 " additional vim c++ syntax highlighting
 Plug 'octol/vim-cpp-enhanced-highlight'
 
+" Code Completion - COC
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
@@ -52,3 +55,4 @@ source ~/.config/nvim/startify.vim
 source ~/.config/nvim/goyo.vim
 source ~/.config/nvim/limelight.vim
 source ~/.config/nvim/enhanced_cpp.vim
+source ~/.config/nvim/coc.vim
