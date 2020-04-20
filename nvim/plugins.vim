@@ -45,6 +45,15 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " Code Completion - COC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Google code formating
+" Add maktaba and codefmt to the runtimepath.
+" (The latter must be installed before it can be used.)
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+Plug 'google/vim-glaive'
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
@@ -56,3 +65,4 @@ source ~/.config/nvim/goyo.vim
 source ~/.config/nvim/limelight.vim
 source ~/.config/nvim/enhanced_cpp.vim
 source ~/.config/nvim/coc.vim
+source ~/.config/nvim/codefmt.vim
