@@ -1,7 +1,7 @@
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
+"if (empty($TMUX))
   if (has("nvim"))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -12,8 +12,26 @@ if (empty($TMUX))
   if (has("termguicolors"))
     set termguicolors
   endif
+"endif
+
+" onedark.vim override: Don't set a background color when running in a terminal;
+" just use the terminal's background color
+" `gui` is the hex color code used in GUI mode/nvim true-color mode
+" `cterm` is the color code used in 256-color mode
+" `cterm16` is the color code used in 16-color mode
+if (has("autocmd") && !has("gui_running"))
+  augroup colorset
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+  augroup END
 endif
 
+let g:onedark_color_overrides = {
+\ "Dark Red": { "gui": "#FF0000", "cterm": "170", "cterm16": "5" },
+\ "Purple": { "gui": "#a41623", "cterm": "180", "cterm16": "5" }
+\}
+
 let g:onedark_terminal_italics=1
-"syntax on
+syntax on
 colorscheme onedark
