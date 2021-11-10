@@ -61,7 +61,7 @@ augroup END
 let NERDTreeShowHidden=1
 " let NERDTreeDirArrowExpandable = '▷'
 " let NERDTreeDirArrowCollapsible = '▼'
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
 \ 'Modified'  : '✹',
 \ 'Staged'    : '✚',
 \ 'Untracked' : '✭',
