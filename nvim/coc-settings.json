@@ -20,6 +20,114 @@
                     "directory": "/tmp/ccls"
                 }
             }
+        },
+    },
+
+    // diagnostic-languageserver
+    "diagnostic-languageserver.filetypes": {
+        "vim": "vint",
+        "email": "languagetool",
+        "markdown": [ "write-good", "markdownlint" ],
+        "sh": "shellcheck",
+        "elixir": ["mix_credo", "mix_credo_compile"],
+        "eelixir": ["mix_credo", "mix_credo_compile"],
+        "php": ["phpstan", "psalm"],
+        "yaml": [ "yamllint" ],
+        "cmake": [ "cmake-lint", "cmakelint" ],
+        "systemd": "systemd-analyze",
+        "python": "pylint"
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+        "dart": "dartfmt",
+        "elixir": "mix_format",
+        "eelixir": "mix_format",
+        "python": ["black"],
+        "lua": "lua-format",
+        "sh": "shfmt",
+        "blade": "blade-formatter",
+        "cmake": "cmake-format",
+    },
+    "diagnostic-languageserver.formatters": {
+        "black": {
+            "command": "black",
+            "args": ["-q", "-"]
         }
-    }
+    },
+    "diagnostic-languageserver.linters": {
+        "pylint": {
+            "sourceName": "pylint",
+            "command": "pylint",
+            "debounce": 100,
+            "args": [
+                "--output-format",
+                "text",
+                "--score",
+                "no",
+                "--msg-template",
+                "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+                "%file"
+            ],
+            "formatPattern": [
+                "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "endColumn": 2,
+                    "security": 3,
+                    "message": 4
+                }
+            ],
+            "rootPatterns": ["pyproject.toml", "setup.py", ".git"],
+            "securities": {
+                "informational": "hint",
+                "refactor": "info",
+                "convention": "info",
+                "warning": "warning",
+                "error": "error",
+                "fatal": "error"
+            },
+            "offsetColumn": 1,
+            "offsetColumnEnd": 1,
+            "formatLines": 1
+        }
+    },
+
+    // python formatting
+    "coc.preferences.formatOnType": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+//        "python",
+        "markdown",
+        "javascript",
+        "json"
+    ],
+    // jedi language server for python
+    "jedi.enable": true,
+    "jedi.startupMessage": true,
+//    "jedi.jediSettings.autoImportModules": [],
+    "jedi.jediSettings.caseInsensitiveCompletion": false,
+    "jedi.jediSettings.debug": true,
+//    "jedi.executable.command": "jedi-language-server",
+    "jedi.executable.args": [],
+//    "jedi.codeAction.nameExtractFunction": "jls_extract_def",
+//    "jedi.codeAction.nameExtractVariable": "jls_extract_var",
+    "jedi.completion.disableSnippets": false,
+    "jedi.completion.resolveEagerly": false,
+//    "jedi.completion.ignorePatterns": [],
+    "jedi.diagnostics.enable": true,
+    "jedi.diagnostics.didOpen": true,
+    "jedi.diagnostics.didChange": true,
+    "jedi.diagnostics.didSave": true,
+    "jedi.hover.enable": true,
+    "jedi.hover.disable.keyword.all": false,
+    "jedi.hover.disable.keyword.names": [],
+    "jedi.hover.disable.keyword.fullNames": [],
+    "jedi.workspace.extraPaths": [],
+    "jedi.workspace.symbols.maxSymbols": 20,
+    "jedi.workspace.symbols.ignoreFolders": [
+        ".nox",
+        ".tox",
+        ".venv",
+        "__pycache__",
+        "venv"
+    ]
 }
