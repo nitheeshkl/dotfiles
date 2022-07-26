@@ -24,6 +24,7 @@
     },
 
     // diagnostic-languageserver
+    "diagnostic-languageserver.enable": true,
     "diagnostic-languageserver.filetypes": {
         "vim": "vint",
         "email": "languagetool",
@@ -94,15 +95,15 @@
 
     // python formatting
     "coc.preferences.formatOnType": true,
-    "coc.preferences.formatOnSaveFiletypes": [
+//    "coc.preferences.formatOnSaveFiletypes": [
 //        "python",
-        "markdown",
-        "javascript",
-        "json"
-    ],
+//        "markdown",
+//        "javascript",
+//        "json"
+//    ],
     // jedi language server for python
     "jedi.enable": true,
-    "jedi.startupMessage": true,
+    "jedi.startupMessage": false,
 //    "jedi.jediSettings.autoImportModules": [],
     "jedi.jediSettings.caseInsensitiveCompletion": false,
     "jedi.jediSettings.debug": true,
