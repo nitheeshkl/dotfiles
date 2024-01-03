@@ -54,6 +54,9 @@ Plug 'google/vim-codefmt'
 " `:help :Glaive` for usage.
 Plug 'google/vim-glaive'
 
+" vim tmux navigator
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 source ~/.config/nvim/onedark.vim
