@@ -42,7 +42,7 @@
         "dart": "dartfmt",
         "elixir": "mix_format",
         "eelixir": "mix_format",
-        "python": ["black"],
+        "python": ["yapf"],
         "lua": "lua-format",
         "sh": "shfmt",
         "blade": "blade-formatter",
@@ -50,8 +50,8 @@
     },
     "diagnostic-languageserver.formatters": {
         "black": {
-            "command": "black",
-            "args": ["-q", "-"]
+            "command": "yapf",
+            "args": ["--style='{based_on_style: facebook, indent_width: 2}"]
         }
     },
     "diagnostic-languageserver.linters": {
