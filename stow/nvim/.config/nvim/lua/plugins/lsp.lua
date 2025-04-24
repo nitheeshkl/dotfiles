@@ -12,6 +12,12 @@ return {
         ensure_installed = {
           "lua_ls",
           "pyright",
+          "ltex",
+          "jsonls",
+          "html",
+          "dockerls",
+          "docker_compose_language_service",
+          "bashls"
         },
       })
     end,
