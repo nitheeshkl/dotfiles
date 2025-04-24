@@ -4,9 +4,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- toggle paste mode
-vim.cmd("nnoremap <C-v> :set invpaste paste?<CR>")
-vim.cmd("set pastetoggle=<C-v>")
 vim.cmd("set showmode")
 
 -- turn off search highlights
