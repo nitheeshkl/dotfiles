@@ -7,8 +7,11 @@ return {
     config = function()
 
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+      local function get_current_dir()
+        return vim.fn.expand("%:p:h")
+      end
+      vim.keymap.set('n', '<leader>f', function() builtin.find_files({ cwd = get_current_dir() }) end, {})
+      vim.keymap.set('n', '<C-S-f>', function() builtin.live_grep({ cwd = get_current_dir() }) end, {})
 
     end
   },
