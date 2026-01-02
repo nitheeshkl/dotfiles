@@ -18,6 +18,12 @@ vim.cmd("nnoremap <C-H> <C-W><C-H>")
 vim.cmd("nnoremap <silent> <leader>s :split<CR>")
 vim.cmd("nnoremap <silent> <leader>v :vsplit<CR>")
 
+-- window/pane navigation
+vim.keymap.set('n', '<leader><Up>', '<C-W>k')
+vim.keymap.set('n', '<leader><Down>', '<C-W>j')
+vim.keymap.set('n', '<leader><Left>', '<C-W>h')
+vim.keymap.set('n', '<leader><Right>', '<C-W>l')
+
 -- tabs key bindings
 vim.cmd("map <C-Up> :tabr<CR>")
 vim.cmd("map <C-Down> :tabl<CR>")
