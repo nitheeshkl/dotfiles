@@ -2,9 +2,28 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    tag = 'v0.2.1',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
+      local actions = require('telescope.actions')
+      require('telescope').setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-Up>"] = actions.preview_scrolling_up,
+              ["<C-Down>"] = actions.preview_scrolling_down,
+              ["<C-Left>"] = actions.preview_scrolling_left,
+              ["<C-Right>"] = actions.preview_scrolling_right,
+            },
+            n = {
+              ["<C-Up>"] = actions.preview_scrolling_up,
+              ["<C-Down>"] = actions.preview_scrolling_down,
+              ["<C-Left>"] = actions.preview_scrolling_left,
+              ["<C-Right>"] = actions.preview_scrolling_right,
+            },
+          },
+        },
+      })
 
       local builtin = require('telescope.builtin')
       local function get_current_dir()
