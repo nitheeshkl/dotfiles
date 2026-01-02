@@ -12,6 +12,7 @@ return {
       end
       vim.keymap.set('n', '<leader>f', function() builtin.find_files({ cwd = get_current_dir() }) end, {})
       vim.keymap.set('n', '<C-S-f>', function() builtin.live_grep({ cwd = get_current_dir() }) end, {})
+      vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 
     end
   },
