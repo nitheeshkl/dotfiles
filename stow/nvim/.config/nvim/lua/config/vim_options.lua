@@ -33,8 +33,6 @@ vim.cmd("set autoread")
 vim.cmd("set autowrite")
 -- backspacing over everything in insert mode
 vim.cmd("set backspace=indent,eol,start")
--- which directory to use for the file browser
-vim.cmd("set browsedir=current")
 -- how many lines of history vim has to remember
 vim.cmd("set history=500")
 -- turn on magic for regular expression matching
