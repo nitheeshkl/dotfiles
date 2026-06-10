@@ -1,3 +1,6 @@
 nvim/autoload
 nvim/plugins
 .claude
+
+# zellij zjstatus plugin — compiled wasm, fetched separately (see README)
+stow/zellij/.config/zellij/plugins/zjstatus.wasm

@@ -8,8 +8,9 @@ so stowing it just creates the right symlinks:
 
 | Package | Symlinks to | What it is |
 |---------|-------------|------------|
-| `stow/nvim`  | `~/.config/nvim`  | Neovim — lazy.nvim, LSP, completion, git, formatting (see below) |
-| `stow/kitty` | `~/.config/kitty` | kitty terminal config |
+| `stow/nvim`   | `~/.config/nvim`   | Neovim — lazy.nvim, LSP, completion, git, formatting (see below) |
+| `stow/kitty`  | `~/.config/kitty`  | kitty terminal config |
+| `stow/zellij` | `~/.config/zellij` | zellij multiplexer — config, vesper theme, zjstatus bar (see below) |
 
 > The top-level `vim/`, `nvim/`, and `vimrc` are an **older** vim-plug / coc.nvim
 > setup, kept for reference. New work happens in `stow/`.
@@ -22,12 +23,51 @@ cd ~/dotfiles/stow
 
 stow -t ~ nvim      # -> ~/.config/nvim
 stow -t ~ kitty     # -> ~/.config/kitty
+stow -t ~ zellij    # -> ~/.config/zellij  (fetch zjstatus.wasm first, see below)
 ```
 
 `-t ~` targets your home directory. If a config already exists at the target
 path, move it aside first or stow will refuse to overwrite a non-symlink.
 
 To remove a package's symlinks: `stow -t ~ -D nvim`.
+
+## zellij (`stow/zellij`)
+
+[zellij](https://github.com/zellij-org/zellij) config, the `vesper_kln` theme, the
+`default` layout, and the [zjstatus](https://github.com/dj95/zjstatus) status
+bar. The package mirrors `~/.config/zellij`:
+
+```
+stow/zellij/.config/zellij/config.kdl
+stow/zellij/.config/zellij/themes/vesper_kln.kdl
+stow/zellij/.config/zellij/layouts/default.kdl
+stow/zellij/.config/zellij/plugins/zjstatus.wasm   # gitignored, see below
+```
+
+### Setup
+
+`zjstatus.wasm` is a compiled binary and is **not** committed (it's in
+`.gitignore`). Fetch it into the package before stowing, then stow:
+
+```bash
+cd ~/dotfiles/stow
+
+# 1. download the zjstatus plugin into the package
+mkdir -p zellij/.config/zellij/plugins
+curl -fL -o zellij/.config/zellij/plugins/zjstatus.wasm \
+  https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
+
+# 2. if a real ~/.config/zellij already exists, move it aside first
+#    (stow refuses to overwrite a non-symlink)
+mv ~/.config/zellij ~/.config/zellij.bak 2>/dev/null || true
+
+# 3. create the symlink
+stow -t ~ zellij    # -> ~/.config/zellij
+```
+
+> Adding a *new* zellij config to this repo follows the same shape: copy the
+> file into the path it should have under `$HOME` (i.e. under
+> `stow/zellij/.config/zellij/…`), then re-run `stow -t ~ zellij`.
 
 ## Neovim (`stow/nvim`)
 
