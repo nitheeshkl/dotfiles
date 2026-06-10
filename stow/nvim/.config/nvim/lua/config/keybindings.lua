@@ -32,3 +32,15 @@ vim.cmd("map <C-right> :tabn<CR>")
 
 -- clipboard
 vim.keymap.set('v', '<leader>y', '"+y')
+
+-- jumplist navigation: <C-o>/<C-i> are captured by zellij, so map leader keys.
+-- The <C-o>/<C-i> on the RHS run inside nvim, bypassing the terminal entirely.
+-- mnemonic: o = older location (back), i = newer location (forward)
+vim.keymap.set('n', '<leader>o', '<C-o>', { desc = 'Jumplist: back (older)' })
+vim.keymap.set('n', '<leader>i', '<C-i>', { desc = 'Jumplist: forward (newer)' })
+
+-- open the keybindings reference in a read-only vertical split
+vim.keymap.set('n', '<leader>?', function()
+  local path = vim.fn.stdpath('config') .. '/keybindings.md'
+  vim.cmd('vertical sview ' .. vim.fn.fnameescape(path))
+end, { desc = 'Show keybindings reference' })

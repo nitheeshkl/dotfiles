@@ -131,7 +131,7 @@ return {
               deleted = "✖", -- this can only be used in the git_status source
               renamed = "󰁕", -- this can only be used in the git_status source
               -- Status type
-              untracked = "",
+              untracked = "?",
               ignored = "",
               unstaged = "󰄱",
               staged = "",
@@ -375,6 +375,60 @@ return {
 
       -- vim.keymap.set("n", "<leader>e", "<Cmd>Neotree reveal<CR>")
       vim.keymap.set('n', '<leader>n', '<Cmd>Neotree toggle reveal<CR>')
+
+      -- On `nvim` with no file arguments, open neo-tree on the current dir.
+      -- (Directory args like `nvim .` are already handled by the netrw hijack.)
+      local function open_tree_on_start()
+        local buf = vim.api.nvim_get_current_buf()
+        local empty = vim.api.nvim_buf_get_name(buf) == ""
+          and vim.bo[buf].buftype == ""
+          and vim.api.nvim_buf_line_count(buf) == 1
+          and (vim.api.nvim_buf_get_lines(buf, 0, -1, false)[1] or "") == ""
+        -- argc == 0 and a pristine empty buffer => plain `nvim` (not a file,
+        -- not piped stdin, not a session). Show the tree, focused for browsing.
+        if vim.fn.argc() == 0 and empty then
+          require("neo-tree.command").execute({
+            action = "focus",
+            source = "filesystem",
+            position = "left",
+            dir = vim.fn.getcwd(),
+          })
+        end
+      end
+
+      -- neo-tree's config can run either before or after VimEnter (it depends on
+      -- load order); handle both so the tree reliably opens.
+      if vim.v.vim_did_enter == 1 then
+        open_tree_on_start()
+      else
+        vim.api.nvim_create_autocmd("VimEnter", { callback = open_tree_on_start })
+      end
+
+      -- Closing the last real file with neo-tree open should also close the tree
+      -- and exit nvim (rather than leaving a lone tree, or :q refusing to quit).
+      -- On :q, if the only windows that would remain are neo-tree (and floats),
+      -- close the tree first so the quit goes through and nvim exits.
+      vim.api.nvim_create_autocmd("QuitPre", {
+        group = vim.api.nvim_create_augroup("NeoTreeQuitOnLast", { clear = true }),
+        callback = function()
+          local tree_wins, other_wins = {}, 0
+          for _, w in ipairs(vim.api.nvim_list_wins()) do
+            local buf = vim.api.nvim_win_get_buf(w)
+            if vim.bo[buf].filetype == "neo-tree" then
+              tree_wins[#tree_wins + 1] = w
+            elseif vim.api.nvim_win_get_config(w).relative == "" then
+              other_wins = other_wins + 1 -- a normal (non-floating) window
+            end
+          end
+          -- QuitPre fires before the window closes, so the window being quit is
+          -- still counted: other_wins == 1 means it's the last real file window.
+          if other_wins == 1 and #tree_wins > 0 then
+            for _, w in ipairs(tree_wins) do
+              vim.api.nvim_win_close(w, true)
+            end
+          end
+        end,
+      })
     end,
   },
 }

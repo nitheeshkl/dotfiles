@@ -1,6 +1,5 @@
-
-
 require("config.vim_options")
+require("config.autoreload")
+require("config.lastplace")
 require("config.keybindings")
 require("config.lazy")
-
