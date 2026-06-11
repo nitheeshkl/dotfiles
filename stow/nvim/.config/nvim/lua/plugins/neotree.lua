@@ -60,6 +60,29 @@ return {
       vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
       vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
+      -- Count normal (non-floating, non-neo-tree) windows showing a real file
+      -- worth keeping nvim open for. The pristine empty buffer that `nvim`
+      -- (no args) starts with does not count, nor does `except` (the window
+      -- currently being quit, which QuitPre has not closed yet).
+      local function real_file_windows(except)
+        local n = 0
+        for _, w in ipairs(vim.api.nvim_list_wins()) do
+          if w ~= except and vim.api.nvim_win_get_config(w).relative == "" then
+            local b = vim.api.nvim_win_get_buf(w)
+            if vim.bo[b].filetype ~= "neo-tree" then
+              local pristine = vim.api.nvim_buf_get_name(b) == ""
+                and vim.bo[b].buftype == ""
+                and vim.api.nvim_buf_line_count(b) == 1
+                and (vim.api.nvim_buf_get_lines(b, 0, -1, false)[1] or "") == ""
+              if not pristine then
+                n = n + 1
+              end
+            end
+          end
+        end
+        return n
+      end
+
       require("neo-tree").setup({
         close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
@@ -404,28 +427,28 @@ return {
         vim.api.nvim_create_autocmd("VimEnter", { callback = open_tree_on_start })
       end
 
-      -- Closing the last real file with neo-tree open should also close the tree
-      -- and exit nvim (rather than leaving a lone tree, or :q refusing to quit).
-      -- On :q, if the only windows that would remain are neo-tree (and floats),
-      -- close the tree first so the quit goes through and nvim exits.
+      -- Quitting (`:q`, `:x`, `:wq`, …) when no real file is open should exit
+      -- nvim entirely, instead of leaving a lone neo-tree sidebar or the empty
+      -- startup buffer behind. This covers quitting from inside neo-tree itself
+      -- (plain `nvim`) as well as closing the last real file window.
+      local quitting = false
       vim.api.nvim_create_autocmd("QuitPre", {
         group = vim.api.nvim_create_augroup("NeoTreeQuitOnLast", { clear = true }),
         callback = function()
-          local tree_wins, other_wins = {}, 0
-          for _, w in ipairs(vim.api.nvim_list_wins()) do
-            local buf = vim.api.nvim_win_get_buf(w)
-            if vim.bo[buf].filetype == "neo-tree" then
-              tree_wins[#tree_wins + 1] = w
-            elseif vim.api.nvim_win_get_config(w).relative == "" then
-              other_wins = other_wins + 1 -- a normal (non-floating) window
-            end
+          if quitting then
+            return
           end
-          -- QuitPre fires before the window closes, so the window being quit is
-          -- still counted: other_wins == 1 means it's the last real file window.
-          if other_wins == 1 and #tree_wins > 0 then
-            for _, w in ipairs(tree_wins) do
-              vim.api.nvim_win_close(w, true)
-            end
+          -- QuitPre fires before the window closes, so exclude the window being
+          -- quit. If nothing real would remain, finish the job with :qall.
+          if real_file_windows(vim.api.nvim_get_current_win()) == 0 then
+            quitting = true
+            vim.schedule(function()
+              -- pcall so an unsaved buffer aborting :qall (E37) doesn't wedge
+              -- the guard for later quit attempts.
+              if not pcall(vim.cmd, "qall") then
+                quitting = false
+              end
+            end)
           end
         end,
       })
