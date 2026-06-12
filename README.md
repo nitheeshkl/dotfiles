@@ -23,7 +23,7 @@ cd ~/dotfiles/stow
 
 stow -t ~ nvim      # -> ~/.config/nvim
 stow -t ~ kitty     # -> ~/.config/kitty
-stow -t ~ zellij    # -> ~/.config/zellij  (fetch zjstatus.wasm first, see below)
+stow -t ~ zellij    # -> ~/.config/zellij
 ```
 
 `-t ~` targets your home directory. If a config already exists at the target
@@ -41,29 +41,29 @@ bar. The package mirrors `~/.config/zellij`:
 stow/zellij/.config/zellij/config.kdl
 stow/zellij/.config/zellij/themes/vesper_kln.kdl
 stow/zellij/.config/zellij/layouts/default.kdl
-stow/zellij/.config/zellij/plugins/zjstatus.wasm   # gitignored, see below
+stow/zellij/.config/zellij/plugins/zjstatus.wasm   # committed (see below)
 ```
 
 ### Setup
 
-`zjstatus.wasm` is a compiled binary and is **not** committed (it's in
-`.gitignore`). Fetch it into the package before stowing, then stow:
+`zjstatus.wasm` is a compiled binary checked into the repo, so stowing is all
+that's needed:
 
 ```bash
 cd ~/dotfiles/stow
 
-# 1. download the zjstatus plugin into the package
-mkdir -p zellij/.config/zellij/plugins
-curl -fL -o zellij/.config/zellij/plugins/zjstatus.wasm \
-  https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
-
-# 2. if a real ~/.config/zellij already exists, move it aside first
+# 1. if a real ~/.config/zellij already exists, move it aside first
 #    (stow refuses to overwrite a non-symlink)
 mv ~/.config/zellij ~/.config/zellij.bak 2>/dev/null || true
 
-# 3. create the symlink
+# 2. create the symlink
 stow -t ~ zellij    # -> ~/.config/zellij
 ```
+
+> The committed `zjstatus.wasm` is pinned to whatever release was last vendored.
+> To update it, drop a newer build from
+> [zjstatus releases](https://github.com/dj95/zjstatus/releases) into
+> `stow/zellij/.config/zellij/plugins/zjstatus.wasm` and commit it.
 
 > Adding a *new* zellij config to this repo follows the same shape: copy the
 > file into the path it should have under `$HOME` (i.e. under
