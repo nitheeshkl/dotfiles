@@ -1,0 +1,36 @@
+// Default layout: zjstatus 'slanted' style on top.
+// Colors mapped to the vesper_kln theme (bg #101010, green #90b99f, gray #4b4b4b,
+//   light gray #d3d3d3 (active tab), fg #a0a0a0, lavender #aca1cf).
+// Slant separator glyphs: forward /  U+E0BC / U+E0BD (need a Nerd/powerline font).
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                format_left  "{mode}#[fg=#101010,bg=#90b99f,bold]{session}  #[fg=#90b99f,bg=#101010]{tabs}"
+                format_right "#[fg=#101010,bg=#aca1cf]{datetime}"
+                format_space "#[bg=#101010]"
+
+                hide_frame_for_single_pane "true"
+
+                mode_normal  "#[bg=#90b99f] "
+
+                tab_normal              "#[fg=#101010,bg=#4b4b4b] {name} #[fg=#4b4b4b,bg=#101010]"
+                tab_normal_fullscreen   "#[fg=#a0a0a0,bg=#101010] {name} [] "
+                tab_normal_sync         "#[fg=#a0a0a0,bg=#101010] {name} <> "
+                tab_active              "#[fg=#101010,bg=#d3d3d3,bold,italic] {name} #[fg=#d3d3d3,bg=#101010]"
+                tab_active_fullscreen   "#[fg=#d3d3d3,bg=#101010,bold,italic] {name} [] "
+                tab_active_sync         "#[fg=#d3d3d3,bg=#101010,bold,italic] {name} <> "
+
+
+                datetime          "#[fg=#101010,bg=#aca1cf,bold] {format} "
+                datetime_format   "%A, %d %b %Y %H:%M"
+                datetime_timezone "America/Los_Angeles"
+            }
+        }
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+}
