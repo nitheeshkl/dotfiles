@@ -139,7 +139,8 @@ _blink.cmp, default preset._
 
 | Key | Action |
 |-----|--------|
-| `<leader>f` | Find files _(current file's dir)_ |
+| `<leader>f` | Find files _(nvim's working dir)_ |
+| `<leader>F` | Find files _(current file's dir)_ |
 | `<C-S-f>` | Live grep _(current file's dir)_ |
 | `<leader>b` | List open buffers |
 
