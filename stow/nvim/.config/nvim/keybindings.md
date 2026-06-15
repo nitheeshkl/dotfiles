@@ -76,6 +76,18 @@ _Buffer-local — active in Python, Rust, Lua, … buffers._
 > [!TIP]
 > Formatting also runs automatically on save (conform.nvim).
 
+## 💬  Commenting · _built-in_
+
+_Neovim's built-in commenting (0.10+). Comment string is filetype-aware (treesitter)._
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `gcc` | n | Toggle comment on current line |
+| `gc` | v | Toggle comment on selection _(`V` to select lines first)_ |
+| `gc` + motion | n | Toggle over a motion — e.g. `gc3j`, `gcap`, `gcG` |
+| `gbc` | n | Toggle block comment on current line |
+| `gb` | v | Toggle block comment on selection |
+
 ## ✍️  Prose / Grammar · _harper-ls_
 
 _Active in `markdown`, `text`, `gitcommit` buffers._
@@ -127,7 +139,8 @@ _blink.cmp, default preset._
 
 | Key | Action |
 |-----|--------|
-| `<leader>f` | Find files _(current file's dir)_ |
+| `<leader>f` | Find files _(nvim's working dir)_ |
+| `<leader>F` | Find files _(current file's dir)_ |
 | `<C-S-f>` | Live grep _(current file's dir)_ |
 | `<leader>b` | List open buffers |
 

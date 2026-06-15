@@ -8,7 +8,7 @@ layout {
         pane size=1 borderless=true {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
                 format_left  "{mode}#[fg=#101010,bg=#90b99f,bold]{session}  #[fg=#90b99f,bg=#101010]{tabs}"
-                format_right "#[fg=#101010,bg=#aca1cf]{datetime}"
+                format_right "#[fg=#aca1cf,bg=#101010] {swap_layout} #[fg=#101010,bg=#aca1cf]{datetime}"
                 format_space "#[bg=#101010]"
 
                 hide_frame_for_single_pane "true"
@@ -31,6 +31,89 @@ layout {
         children
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"
+        }
+    }
+
+    // Swap layouts: cycle with Alt+[ / Alt+] (PreviousSwapLayout / NextSwapLayout).
+    // Bare `tab` nodes inherit the default_tab_template chrome via its `children` slot,
+    // so the zjstatus bar persists across swaps. Bodies are the zellij 0.43.1 built-in
+    // defaults (`zellij setup --dump-swap-layout default`), with `ui` -> `tab`.
+    // Names are single chars so {swap_layout} shows compactly in the bar:
+    //   tiled    V = vertical, H = horizontal, S = stacked
+    //   floating G = staggered, P = spread
+    swap_tiled_layout name="V" {
+        tab max_panes=5 {
+            pane split_direction="vertical" {
+                pane
+                pane { children; }
+            }
+        }
+        tab max_panes=8 {
+            pane split_direction="vertical" {
+                pane { children; }
+                pane { pane; pane; pane; pane; }
+            }
+        }
+        tab max_panes=12 {
+            pane split_direction="vertical" {
+                pane { children; }
+                pane { pane; pane; pane; pane; }
+                pane { pane; pane; pane; pane; }
+            }
+        }
+    }
+
+    swap_tiled_layout name="H" {
+        tab max_panes=4 {
+            pane
+            pane
+        }
+        tab max_panes=8 {
+            pane {
+                pane split_direction="vertical" { children; }
+                pane split_direction="vertical" { pane; pane; pane; pane; }
+            }
+        }
+        tab max_panes=12 {
+            pane {
+                pane split_direction="vertical" { children; }
+                pane split_direction="vertical" { pane; pane; pane; pane; }
+                pane split_direction="vertical" { pane; pane; pane; pane; }
+            }
+        }
+    }
+
+    swap_tiled_layout name="S" {
+        tab min_panes=5 {
+            pane split_direction="vertical" {
+                pane
+                pane stacked=true { children; }
+            }
+        }
+    }
+
+    swap_floating_layout name="G" {
+        floating_panes
+    }
+
+    swap_floating_layout name="P" {
+        floating_panes max_panes=1 {
+            pane { y "50%"; x "50%"; }
+        }
+        floating_panes max_panes=2 {
+            pane { x "1%"; y "25%"; width "45%"; }
+            pane { x "50%"; y "25%"; width "45%"; }
+        }
+        floating_panes max_panes=3 {
+            pane { y "55%"; width "45%"; height "45%"; }
+            pane { x "1%"; y "1%"; width "45%"; }
+            pane { x "50%"; y "1%"; width "45%"; }
+        }
+        floating_panes max_panes=4 {
+            pane { x "1%"; y "55%"; width "45%"; height "45%"; }
+            pane { x "50%"; y "55%"; width "45%"; height "45%"; }
+            pane { x "1%"; y "1%"; width "45%"; height "45%"; }
+            pane { x "50%"; y "1%"; width "45%"; height "45%"; }
         }
     }
 }

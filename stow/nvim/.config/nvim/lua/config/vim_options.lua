@@ -1,5 +1,9 @@
 -- Spaces, Tabs, and Indents configs
 
+-- Apply project .editorconfig settings (built-in since nvim 0.9, on by default).
+-- Set explicitly so the behavior is documented and can't be silently disabled.
+vim.g.editorconfig = true
+
 vim.cmd("set tabstop=4") -- number of visual spaces per TAB
 vim.cmd("set softtabstop=4") -- number of spaces in TAB when editing
 vim.cmd("set shiftwidth=4") -- when shifting indent using 4 spaces
