@@ -71,6 +71,10 @@ vim.cmd("set backupskip=/tmp/*")
 vim.cmd("set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp")
 vim.cmd("set writebackup")
 
+-- Line numbers
+vim.cmd("set number") -- show absolute number on the current line
+vim.cmd("set relativenumber") -- show relative numbers on all other lines
+
 -- Search settings
 vim.cmd("set incsearch") -- search as characters are entered
 vim.cmd("set hlsearch") -- highlight search matches
