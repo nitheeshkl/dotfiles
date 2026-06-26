@@ -138,10 +138,10 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
-        bind "Alt left" { MoveFocusOrTab "left"; }
+        bind "Alt left" { GoToPreviousTab; }
         bind "Alt down" { MoveFocus "down"; }
         bind "Alt up" { MoveFocus "up"; }
-        bind "Alt right" { MoveFocusOrTab "right"; }
+        bind "Alt right" { GoToNextTab; }
         bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
@@ -332,8 +332,12 @@ theme "vesper_kln"
 // Options:
 //   - true (default, enabled)
 //   - false
-// 
-// pane_frames false
+//
+// Kept static (true) so pane borders are always shown. zjstatus's
+// `hide_frame_for_single_pane` is intentionally NOT used: it dynamically
+// toggles frames per pane-count while zellij re-asserts this static value
+// every event cycle, and the two fighting causes constant frame flickering.
+pane_frames true
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

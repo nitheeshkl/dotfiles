@@ -50,11 +50,20 @@ vim.cmd("set noswapfile")
 vim.cmd("set inccommand=nosplit")
 
 -- clipboard
--- if has("unnamedplus")
---     set clipboard=unnamedplus
--- elseif has("clipboard")
---     set clipboard=unnamed
--- endif
+-- Use OSC 52 so yanking to the system clipboard works over SSH/TTY sessions
+-- (where xclip/xsel can't reach an X server). The terminal handles the actual
+-- clipboard write via an escape sequence.
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+  },
+  paste = {
+    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+  },
+}
 
 -- Enable file type detection. Use the default filetype settings.
 -- Also load indent files, to automatically do language-dependent indenting.
@@ -70,6 +79,10 @@ vim.cmd("set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp")
 vim.cmd("set backupskip=/tmp/*")
 vim.cmd("set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp")
 vim.cmd("set writebackup")
+
+-- Line numbers
+vim.cmd("set number") -- show absolute number on the current line
+vim.cmd("set relativenumber") -- show relative numbers on all other lines
 
 -- Search settings
 vim.cmd("set incsearch") -- search as characters are entered

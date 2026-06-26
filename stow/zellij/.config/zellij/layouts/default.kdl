@@ -11,8 +11,6 @@ layout {
                 format_right "#[fg=#aca1cf,bg=#101010] {swap_layout} #[fg=#101010,bg=#aca1cf]{datetime}"
                 format_space "#[bg=#101010]"
 
-                hide_frame_for_single_pane "true"
-
                 mode_normal  "#[bg=#90b99f] "
 
                 tab_normal              "#[fg=#101010,bg=#4b4b4b] {name} #[fg=#4b4b4b,bg=#101010]"
