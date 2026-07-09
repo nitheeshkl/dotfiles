@@ -80,7 +80,7 @@ keybinds clear-defaults=true {
         bind "up" { MovePane "up"; }
         bind "right" { MovePane "right"; }
         bind "h" { MovePane "left"; }
-        bind "Ctrl h" { SwitchToMode "normal"; }
+        bind "Ctrl m" { SwitchToMode "normal"; }
         bind "j" { MovePane "down"; }
         bind "k" { MovePane "up"; }
         bind "l" { MovePane "right"; }
@@ -161,7 +161,13 @@ keybinds clear-defaults=true {
         bind "Ctrl Shift q" { Quit; }
     }
     shared_except "locked" "move" {
-        bind "Ctrl h" { SwitchToMode "move"; }
+        // Move-mode entry relocated from `Ctrl h` to `Ctrl m` (mnemonic: move),
+        // freeing `Ctrl h` to pass through to nvim for window navigation
+        // (<C-h/j/k/l> -> <C-W> moves in keybindings.lua).
+        // NOTE: Ctrl+m == Enter (CR) at the byte level; this stays distinct only
+        // because kitty's keyboard protocol is active. If Enter starts triggering
+        // move-mode, the protocol isn't negotiated and this bind must change.
+        bind "Ctrl m" { SwitchToMode "move"; }
     }
     shared_except "locked" "session" {
         bind "Ctrl o" { SwitchToMode "session"; }

@@ -8,7 +8,9 @@
 
 > [!WARNING]
 > This setup runs under **zellij**, which captures many `Ctrl`+letter chords
-> (`g p t n h o b s q`) and `Alt`. See [Notes & zellij caveats](#-notes--zellij-caveats).
+> (`g p t n o b s q`, and `m` = move mode) and `Alt`. `Ctrl-h` is deliberately
+> left free so `<C-h/j/k/l>` reach nvim for split navigation.
+> See [Notes & zellij caveats](#-notes--zellij-caveats).
 
 ---
 
@@ -28,9 +30,9 @@
 |-----|--------|
 | `<leader>s` | Horizontal split |
 | `<leader>v` | Vertical split |
-| `<C-h>` `<C-j>` `<C-k>` `<C-l>` | Move to split left / down / up / right _(tmux-aware)_ |
-| `<C-\>` | Move to previous split / pane |
-| `<leader><Left>` `<Down>` `<Up>` `<Right>` | Move to window left / down / up / right |
+| `<C-h>` `<C-j>` `<C-k>` `<C-l>` | Move to split left / down / up / right |
+| `<C-\>` | Move to previous split |
+| `<leader><Left>` `<Down>` `<Up>` `<Right>` | Move to window left / down / up / right _(legacy; `<C-h/j/k/l>` preferred)_ |
 
 ## 🗂️  Tabs
 
@@ -259,8 +261,11 @@ _Rust buffers use all the **LSP** & **Diagnostics** maps above. Extras via comma
 ## ⚠️  Notes & zellij caveats
 
 > [!NOTE]
-> - **`<C-h/j/k/l>` overlap** — also mapped to `<C-W>` window moves, but
->   vim-tmux-navigator wins (seamless across nvim splits *and* zellij panes).
+> - **`<C-h/j/k/l>`** — plain nvim `<C-W>` window moves. `Ctrl-h` is left
+>   unbound in zellij so it reaches nvim; it's distinct from `<BS>` only under
+>   the Kitty keyboard protocol (kitty). To cross into zellij *panes*, use
+>   `Alt-h/j/k/l`. Move-mode is on `Ctrl-m` in zellij (relies on the same
+>   protocol to stay distinct from `<Enter>`).
 > - **`<C-Up>` overlap** — bound to *first tab* globally and *resume yazi*; the
 >   yazi binding (lazy-loaded) generally wins.
 > - **Telescope arrows** — inside a picker, `<C-Up/Down/Left/Right>` scroll the
