@@ -1,6 +1,10 @@
 return {
   "mikavilpas/yazi.nvim",
   event = "VeryLazy",
+  -- upstream added a git submodule (yazi-plugin/yazi-plugins) used only for its
+  -- own dev/tests; lazy's default `checkout --recurse-submodules` fails on it
+  -- ("could not reset submodule index"). It's not needed at runtime, so skip it.
+  submodules = false,
   keys = {
     -- 👇 in this section, choose your own keymappings!
     {
