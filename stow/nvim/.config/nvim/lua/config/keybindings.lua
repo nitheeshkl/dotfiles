@@ -6,8 +6,12 @@ vim.g.maplocalleader = "\\"
 
 vim.cmd("set showmode")
 
--- turn off search highlights
-vim.cmd("nnoremap <leader><space> :nohlsearch<CR>")
+-- turn off search highlights. nvim's default for this is <C-L>, but that's
+-- taken by split navigation below. Mnemonic: `/` is the search key.
+vim.keymap.set('n', '<leader>/', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight' })
+
+-- buffers: jump back to the buffer you came from (nvim's built-in <C-^>)
+vim.keymap.set('n', '<leader><leader>', '<C-^>', { desc = 'Switch to alternate (last) buffer' })
 
 -- window & splits
 vim.cmd("nnoremap <C-J> <C-W><C-J>")
@@ -32,6 +36,7 @@ vim.cmd("map <C-right> :tabn<CR>")
 
 -- clipboard
 vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
 
 -- jumplist navigation: <C-o>/<C-i> are captured by zellij, so map leader keys.
 -- The <C-o>/<C-i> on the RHS run inside nvim, bypassing the terminal entirely.
