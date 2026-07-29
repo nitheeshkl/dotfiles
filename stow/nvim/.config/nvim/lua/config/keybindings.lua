@@ -32,6 +32,7 @@ vim.cmd("map <C-right> :tabn<CR>")
 
 -- clipboard
 vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
 
 -- jumplist navigation: <C-o>/<C-i> are captured by zellij, so map leader keys.
 -- The <C-o>/<C-i> on the RHS run inside nvim, bypassing the terminal entirely.

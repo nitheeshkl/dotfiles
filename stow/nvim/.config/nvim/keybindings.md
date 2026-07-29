@@ -23,6 +23,7 @@
 | `<leader>o` | Jumplist: back / older location |
 | `<leader>i` | Jumplist: forward / newer location |
 | `<leader>y` | _(visual)_ Yank selection to system clipboard |
+| `<leader>p` | Paste from system clipboard _(needs terminal OSC 52 read support)_ |
 
 ## 🪟  Windows & Splits
 
