@@ -260,6 +260,8 @@ _blink.cmp, default preset._
 
 ## 🤖  Claude Code · _claudecode.nvim_
 
+_Full guide (workflow, setup): [`docs/nvim/claudecode.md`](../../../../docs/nvim/claudecode.md) in the repo._
+
 | Key | Mode | Action |
 |-----|------|--------|
 | `<leader>ac` | n | Toggle Claude terminal |
