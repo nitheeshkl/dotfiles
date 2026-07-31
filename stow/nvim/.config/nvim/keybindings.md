@@ -36,6 +36,17 @@
 | `<C-\>` | Move to previous split |
 | `<leader><Left>` `<Down>` `<Up>` `<Right>` | Move to window left / down / up / right _(legacy; `<C-h/j/k/l>` preferred)_ |
 
+## 🖥️  Terminal
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<C-\>` | t _(any terminal)_ | Drop to normal mode |
+
+> [!NOTE]
+> The stock escape `<C-\><C-n>` doesn't work under zellij (it eats `<C-n>`),
+> hence the one-key `<C-\>`. From normal mode the usual navigation applies:
+> `<C-h/j/k/l>` between splits, `<leader><leader>` for the alternate buffer.
+
 ## 🗂️  Tabs
 
 | Key | Action |
@@ -244,6 +255,31 @@ _blink.cmp, default preset._
 | `<leader>-` | Open yazi at the current file |
 | `<leader>cw` | Open yazi in working directory |
 | `<C-Up>` | Resume last yazi session |
+
+---
+
+## 🤖  Claude Code · _claudecode.nvim_
+
+_Full guide (workflow, setup): [`docs/nvim/claudecode.md`](../../../../docs/nvim/claudecode.md) in the repo._
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>ac` | n | Toggle Claude terminal |
+| `<leader>af` | n | Focus Claude terminal |
+| `<leader>ar` | n | Resume a previous session (`claude --resume`) |
+| `<leader>aC` | n | Continue last session (`claude --continue`) |
+| `<leader>am` | n | Select Claude model |
+| `<leader>ab` | n | Add current buffer to Claude's context |
+| `<leader>as` | v | Send selection to Claude |
+| `<leader>as` | n _(neo-tree)_ | Add file under cursor to Claude's context |
+| `<leader>aa` | n | Accept proposed diff |
+| `<leader>ad` | n | Deny proposed diff |
+
+> [!TIP]
+> Inside the Claude terminal, **`<C-\>`** drops to normal mode; from there the
+> usual split navigation (`<C-h/j/k/l>`) gets you back to your code.
+> `<leader>af` jumps back into Claude. `<leader>aa`/`ad` only
+> matter while Claude is proposing an edit (it opens a diff view).
 
 ---
 
