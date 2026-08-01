@@ -34,6 +34,7 @@
 | `<leader>v` | Vertical split |
 | `<C-h>` `<C-j>` `<C-k>` `<C-l>` | Move to split left / down / up / right |
 | `<C-\>` | Move to previous split |
+| `<leader>w` | **Resize mode** — then tap `h`/`l` (width ±5) and `j`/`k` (height ±2) repeatedly; `=` equalize; any other key exits |
 | `<leader><Left>` `<Down>` `<Up>` `<Right>` | Move to window left / down / up / right _(legacy; `<C-h/j/k/l>` preferred)_ |
 
 ## 🖥️  Terminal
