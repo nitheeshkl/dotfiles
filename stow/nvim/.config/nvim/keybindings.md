@@ -196,6 +196,7 @@ _blink.cmp, default preset._
 | `<leader>gb` | n | Blame (full file) |
 | `<leader>gp` | n | Push |
 | `<leader>gP` | n | Pull |
+| `<leader>gl` | n | Commit graph — colored `git log --graph` in a full-height terminal vsplit on the right; `q` closes _(plain terminal, not fugitive)_ |
 
 > [!TIP]
 > In the `<leader>gs` status window: `s` / `u` stage / unstage, `cc` commit, `=` toggle inline diff, `dv` open a file in a diff-split, `P` push.
