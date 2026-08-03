@@ -41,12 +41,17 @@
 
 | Key | Mode | Action |
 |-----|------|--------|
+| `` <leader>` `` | n | Toggle the persistent shell in a bottom-most, full-width split |
+| `<leader>~` | n | Toggle the same shell in a centered floating window _(auto-hides when focus leaves it)_ |
 | `<C-\>` | t _(any terminal)_ | Drop to normal mode |
 
 > [!NOTE]
 > The stock escape `<C-\><C-n>` doesn't work under zellij (it eats `<C-n>`),
 > hence the one-key `<C-\>`. From normal mode the usual navigation applies:
 > `<C-h/j/k/l>` between splits, `<leader><leader>` for the alternate buffer.
+> `` <leader>` ``/`<leader>~` share **one** shell session — hiding it keeps the
+> process alive, and pressing the other view's key while it's open *moves* it
+> there (split ↔ float) instead of opening a second terminal.
 
 ## 🗂️  Tabs
 
@@ -158,6 +163,7 @@ _blink.cmp, default preset._
 | `<leader>f` | Find files _(nvim's working dir)_ |
 | `<leader>F` | Find files _(current file's dir)_ |
 | `<C-S-f>` | Live grep _(current file's dir)_ |
+| `<C-S-g>` | Live grep _(nvim's working dir — whole workspace)_ |
 | `<leader>b` | List open buffers |
 
 **Inside a picker**
@@ -196,6 +202,7 @@ _blink.cmp, default preset._
 | `<leader>gb` | n | Blame (full file) |
 | `<leader>gp` | n | Push |
 | `<leader>gP` | n | Pull |
+| `<leader>gl` | n | Commit graph — colored `git log --graph` in a full-height terminal vsplit on the right; `q` closes _(plain terminal, not fugitive)_ |
 
 > [!TIP]
 > In the `<leader>gs` status window: `s` / `u` stage / unstage, `cc` commit, `=` toggle inline diff, `dv` open a file in a diff-split, `P` push.

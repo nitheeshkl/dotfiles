@@ -68,6 +68,33 @@ vim.cmd("map <C-Down> :tabl<CR>")
 vim.cmd("map <C-left> :tabp<CR>")
 vim.cmd("map <C-right> :tabn<CR>")
 
+-- git log graph in a full-height terminal vsplit on the right. A terminal
+-- (not a scratch buffer) because the %C tokens emit ANSI colors that only a
+-- terminal renders. List-form argv sidesteps shell/cmdline quoting of the
+-- format string. q closes the pane.
+vim.keymap.set('n', '<leader>gl', function()
+  vim.cmd('botright vnew')
+  local win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_get_current_buf()
+  vim.fn.jobstart({
+    'git', '--no-pager', 'log', '--graph',
+    '--pretty=format:%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset',
+    '--abbrev-commit', '--date=relative',
+  }, {
+    term = true,
+    on_exit = function()
+      -- git prints oldest-last; put the cursor back on the newest commit.
+      vim.schedule(function()
+        if vim.api.nvim_win_is_valid(win) and vim.api.nvim_win_get_buf(win) == buf then
+          vim.api.nvim_win_set_cursor(win, { 1, 0 })
+        end
+      end)
+    end,
+  })
+  vim.bo[buf].bufhidden = 'wipe'
+  vim.keymap.set('n', 'q', '<cmd>bdelete!<cr>', { buffer = buf, desc = 'Close git log' })
+end, { desc = 'Git log graph (terminal vsplit, right)' })
+
 -- clipboard
 vim.keymap.set('v', '<leader>y', '"+y')
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
