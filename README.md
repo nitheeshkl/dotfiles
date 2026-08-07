@@ -11,6 +11,7 @@ so stowing it just creates the right symlinks:
 | `stow/nvim`   | `~/.config/nvim`   | Neovim — lazy.nvim, LSP, completion, git, formatting, Claude Code | [docs/nvim/](docs/nvim/README.md) |
 | `stow/kitty`  | `~/.config/kitty`  | kitty terminal config | — |
 | `stow/zellij` | `~/.config/zellij` | zellij multiplexer — config, vesper theme, zjstatus bar | [docs/zellij/](docs/zellij/README.md) |
+| `stow/herdr`  | `~/.config/herdr/config.toml` | herdr workspace manager — zellij-style keybindings | [docs/herdr/](docs/herdr/README.md) |
 
 > The top-level `vim/`, `nvim/`, and `vimrc` are an **older** vim-plug / coc.nvim
 > setup, kept for reference. New work happens in `stow/`.
@@ -24,6 +25,7 @@ cd ~/dotfiles/stow
 stow -t ~ nvim      # -> ~/.config/nvim
 stow -t ~ kitty     # -> ~/.config/kitty
 stow -t ~ zellij    # -> ~/.config/zellij
+stow -t ~ herdr     # -> ~/.config/herdr/config.toml
 ```
 
 `-t ~` targets your home directory. If a config already exists at the target
@@ -42,3 +44,4 @@ package:
   - [`keybindings.md`](stow/nvim/.config/nvim/keybindings.md) — full key
     reference (lives with the config so `<leader>?` can open it in nvim).
 - [`docs/zellij/`](docs/zellij/README.md) — setup, zjstatus, keybinding notes.
+- [`docs/herdr/`](docs/herdr/README.md) — setup, zellij → herdr keybinding mapping.
