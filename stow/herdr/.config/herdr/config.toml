@@ -1,0 +1,55 @@
+# herdr configuration — ~/.config/herdr/config.toml
+# Keybindings are chosen to mirror the zellij config (stow/zellij) so the
+# same muscle memory works in both. See docs/herdr/README.md for the mapping.
+#
+# Alt is the primary "prefix": a bare modifier can't be a herdr prefix key
+# (herdr rejects `prefix = "alt"`), so frequent actions are bound as direct
+# alt+key chords instead — the same always-on Alt layer zellij uses.
+# Deliberately NOT ctrl+h/j/k/l anywhere — those must pass through to nvim,
+# where <C-h/j/k/l> does window navigation.
+
+[keys]
+# Prefix for the less-frequent commands left on their prefix+... defaults
+# below. alt+a keeps the whole layout on the Alt "namespace": alt+<key> for
+# frequent actions, alt+a then <key> for the rest. Rejected alternatives:
+# alt+space (KDE grabs it globally for KRunner), alt+b (readline M-b
+# backward-word in bash/zsh).
+prefix = "alt+a"
+
+# Pane focus, exactly zellij's global Alt-hjkl.
+focus_pane_left = "alt+h"
+focus_pane_down = "alt+j"
+focus_pane_up = "alt+k"
+focus_pane_right = "alt+l"
+
+# New panes: alt+n mirrors zellij's Alt+n (new pane, side-by-side);
+# alt+d is "down" for an explicit stacked split (zellij pane-mode d).
+split_vertical = "alt+n"
+split_horizontal = "alt+d"
+
+# Pane ops: x/z from zellij pane-mode x (close) and tmux-mode z (fullscreen).
+close_pane = "alt+x"
+zoom = "alt+z"
+
+# Tabs: alt+c mirrors tmux-mode c (new tab); alt+left/right mirror zellij's
+# global Alt+arrow tab switching; alt+1..9 jumps directly.
+new_tab = "alt+c"
+previous_tab = "alt+left"
+next_tab = "alt+right"
+switch_tab = "alt+1..9"
+
+# Mode entries, on the Alt layer like everything else:
+# r = resize, s = scroll (zellij's scroll-mode letter, moved from Ctrl+s).
+resize_mode = "alt+r"
+copy_mode = "alt+s"
+
+# Everything else keeps herdr's default prefix+... bindings (prefix = alt+a):
+#   detach           = "prefix+q"
+#   edit_scrollback  = "prefix+e"       (zellij scroll-mode e)
+#   rename_tab       = "prefix+shift+t"
+#   rename_pane      = "prefix+shift+p"
+#   close_tab        = "prefix+shift+x"
+#   workspace_picker = "prefix+w"       (~ zellij session manager Ctrl+o w)
+#   new_workspace    = "prefix+shift+n"
+#   reload_config    = "prefix+shift+r"
+#   help             = "prefix+?"

@@ -1,3 +1,9 @@
 nvim/autoload
 nvim/plugins
 .claude
+
+# herdr keeps runtime state (logs, sockets, session.json) next to its config;
+# only config.toml is ours. Guards against runtime files landing in the repo
+# if ~/.config/herdr ever becomes a folded stow symlink to this directory.
+stow/herdr/.config/herdr/*
+!stow/herdr/.config/herdr/config.toml
