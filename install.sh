@@ -155,7 +155,10 @@ install_yazi() {
     return
   fi
   log "building yazi with cargo (this takes a while)"
-  cargo install --locked yazi-fm yazi-cli
+  # The yazi-fm/yazi-cli crates refuse to build directly ("Due to Cargo's
+  # limitations...") — upstream requires going through the yazi-build
+  # wrapper crate, which compiles both and installs the yazi + ya binaries.
+  cargo install --locked --force yazi-build
 }
 
 # ------------------------------------------------- 8. stow configs ----
