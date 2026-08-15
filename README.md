@@ -18,8 +18,24 @@ so stowing it just creates the right symlinks:
 
 ## Install
 
+On a fresh Debian/Ubuntu machine (amd64 or arm64), [`install.sh`](install.sh)
+sets up **nvim + zellij** end to end — apt build deps, rustup, nvm + Node LTS,
+the tree-sitter CLI, neovim built from master, zellij and yazi built from
+source with cargo — then stows both configs:
+
 ```bash
 git clone <this-repo> ~/dotfiles
+cd ~/dotfiles
+./install.sh            # idempotent; --force rebuilds everything
+```
+
+Only the apt step uses sudo; everything else lands in `~/.local` /
+`~/.cargo/bin`. Existing non-symlink configs are moved to
+`~/.config/<name>.pre-stow.bak` before stowing.
+
+To stow packages manually (e.g. kitty, which the script doesn't cover):
+
+```bash
 cd ~/dotfiles/stow
 
 stow -t ~ nvim      # -> ~/.config/nvim
