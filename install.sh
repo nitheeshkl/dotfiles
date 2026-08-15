@@ -107,15 +107,29 @@ install_node() {
 }
 
 # ---------------------------------------------- 4. tree-sitter CLI ----
+# The prebuilt release binaries for every version nvim-treesitter accepts
+# (>= 0.26.1) are linked against glibc 2.39, so they don't run on older
+# systems (e.g. Ubuntu 22.04 / Jetson = 2.35). Probe the downloaded binary
+# and fall back to building the CLI from source with cargo when it can't
+# run here.
 install_tree_sitter() {
   if [[ -x "$LOCAL_BIN/tree-sitter" && $FORCE -eq 0 ]]; then
     skip "tree-sitter already installed ($("$LOCAL_BIN/tree-sitter" --version))"
     return
   fi
   log "installing tree-sitter CLI $TREE_SITTER_VERSION ($TS_ARCH)"
+  local tmp="$LOCAL_BIN/.tree-sitter.download"
   curl -sSfL "https://github.com/tree-sitter/tree-sitter/releases/download/$TREE_SITTER_VERSION/tree-sitter-$TS_ARCH.gz" |
-    gunzip >"$LOCAL_BIN/tree-sitter"
-  chmod +x "$LOCAL_BIN/tree-sitter"
+    gunzip >"$tmp"
+  chmod +x "$tmp"
+  if "$tmp" --version &>/dev/null; then
+    mv "$tmp" "$LOCAL_BIN/tree-sitter"
+    return
+  fi
+  rm -f "$tmp"
+  log "prebuilt tree-sitter needs a newer glibc than this system's" \
+    "($(getconf GNU_LIBC_VERSION 2>/dev/null || echo unknown)); building from source with cargo"
+  cargo install --locked --root "$HOME/.local" "tree-sitter-cli@${TREE_SITTER_VERSION#v}"
 }
 
 # ------------------------------------------- 5. neovim from source ----
