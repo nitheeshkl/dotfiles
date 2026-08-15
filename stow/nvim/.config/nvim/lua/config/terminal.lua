@@ -1,7 +1,12 @@
--- Terminal-mode escape key.
+-- Terminal-mode escape keys.
 --
--- <C-\> in ANY :terminal drops to normal mode — a one-key replacement for the
--- stock <C-\><C-n>, which is unusable under zellij (it captures <C-n>).
+-- <C-Space> in ANY :terminal drops to normal mode. Picked for ergonomics
+-- (ctrl+thumb, no pinky stretch); it transmits as a plain NUL byte so it
+-- survives kitty→zellij→nvim without the kitty keyboard protocol, and the
+-- only thing it means elsewhere is readline's obscure set-mark.
+--
+-- <C-\> is kept as a fallback — a one-key replacement for the stock
+-- <C-\><C-n>, which is unusable under zellij (it captures <C-n>).
 -- Shadowing the native chord costs nothing since it never worked here anyway.
 -- From normal mode the usual window/buffer navigation applies.
 --
@@ -12,8 +17,10 @@
 vim.api.nvim_create_autocmd("TermOpen", {
   group = vim.api.nvim_create_augroup("terminal_escape", { clear = true }),
   callback = function(ev)
-    vim.keymap.set("t", "<C-\\>", [[<C-\><C-n>]],
+    vim.keymap.set("t", "<C-Space>", [[<C-\><C-n>]],
       { buffer = ev.buf, desc = "Terminal: to normal mode" })
+    vim.keymap.set("t", "<C-\\>", [[<C-\><C-n>]],
+      { buffer = ev.buf, desc = "Terminal: to normal mode (fallback)" })
   end,
 })
 

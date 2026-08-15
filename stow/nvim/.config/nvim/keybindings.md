@@ -34,6 +34,7 @@
 | `<leader>v` | Vertical split |
 | `<C-h>` `<C-j>` `<C-k>` `<C-l>` | Move to split left / down / up / right |
 | `<C-\>` | Move to previous split |
+| `<leader>\` | Move to previously focused window |
 | `<leader>w` | **Resize mode** — then tap `h`/`l` (width ±5) and `j`/`k` (height ±2) repeatedly; `=` equalize; any other key exits |
 | `<leader><Left>` `<Down>` `<Up>` `<Right>` | Move to window left / down / up / right _(legacy; `<C-h/j/k/l>` preferred)_ |
 
@@ -41,13 +42,15 @@
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `` <leader>` `` | n | Toggle the persistent shell in a bottom-most, full-width split |
-| `<leader>~` | n | Toggle the same shell in a centered floating window _(auto-hides when focus leaves it)_ |
-| `<C-\>` | t _(any terminal)_ | Drop to normal mode |
+| `` <leader>` `` | n | Toggle the persistent shell in a centered floating window _(auto-hides when focus leaves it)_ |
+| `<leader>~` | n | Toggle the same shell in a bottom-most, full-width split |
+| `<C-Space>` | t _(any terminal)_ | Drop to normal mode |
+| `<C-\>` | t _(any terminal)_ | Drop to normal mode _(fallback)_ |
 
 > [!NOTE]
 > The stock escape `<C-\><C-n>` doesn't work under zellij (it eats `<C-n>`),
-> hence the one-key `<C-\>`. From normal mode the usual navigation applies:
+> hence the one-key escapes — `<C-Space>` for ergonomics, `<C-\>` kept as a
+> fallback. From normal mode the usual navigation applies:
 > `<C-h/j/k/l>` between splits, `<leader><leader>` for the alternate buffer.
 > `` <leader>` ``/`<leader>~` share **one** shell session — hiding it keeps the
 > process alive, and pressing the other view's key while it's open *moves* it
@@ -284,7 +287,7 @@ _Full guide (workflow, setup): [`docs/nvim/claudecode.md`](../../../../docs/nvim
 | `<leader>ad` | n | Deny proposed diff |
 
 > [!TIP]
-> Inside the Claude terminal, **`<C-\>`** drops to normal mode; from there the
+> Inside the Claude terminal, **`<C-Space>`** (or `<C-\>`) drops to normal mode; from there the
 > usual split navigation (`<C-h/j/k/l>`) gets you back to your code.
 > `<leader>af` jumps back into Claude. `<leader>aa`/`ad` only
 > matter while Claude is proposing an edit (it opens a diff view).
