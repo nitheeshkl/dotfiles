@@ -33,7 +33,6 @@ local ensure_installed = {
   "rust",
   "scss",
   "ssh_config",
-  "tmux",
   "typescript",
   "vim",
   "vimdoc",
