@@ -14,6 +14,22 @@
 -- terminal-mode variant: leader is space, and a t-mode <Space>… mapping
 -- makes every pause-after-space at the shell prompt eat a timeoutlen delay.
 
+-- Terminal-window styling: black body, still showing the desktop through
+-- kitty. Kitty renders explicit-bg cells opaque, but kitty.conf declares
+-- this exact color in transparent_background_colors at the same 0.7
+-- opacity as its default background — keep the two hexes in sync. onedark
+-- would otherwise paint floats opaque (NormalFloat = bg1 even with
+-- transparent = true). The border keeps the theme's fg on a bg-less clone.
+local TERM_BG = "#000000"
+
+local function style_term_window(win)
+  local border = vim.api.nvim_get_hl(0, { name = "FloatBorder", link = false })
+  vim.api.nvim_set_hl(0, "TermNormal", { bg = TERM_BG })
+  vim.api.nvim_set_hl(0, "TermFloatBorder", { fg = border.fg })
+  vim.wo[win].winhighlight =
+    "Normal:TermNormal,NormalFloat:TermNormal,FloatBorder:TermFloatBorder"
+end
+
 vim.api.nvim_create_autocmd("TermOpen", {
   group = vim.api.nvim_create_augroup("terminal_escape", { clear = true }),
   callback = function(ev)
@@ -21,6 +37,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
       { buffer = ev.buf, desc = "Terminal: to normal mode" })
     vim.keymap.set("t", "<C-\\>", [[<C-\><C-n>]],
       { buffer = ev.buf, desc = "Terminal: to normal mode (fallback)" })
+    style_term_window(vim.api.nvim_get_current_win())
   end,
 })
 
@@ -80,20 +97,14 @@ local function toggle_shell(want_float)
       title = " terminal ",
       title_pos = "center",
     })
-    -- onedark keeps NormalFloat/FloatBorder opaque (bg1) even with
-    -- transparent = true, so the float looks solid while every split shows
-    -- the terminal emulator's transparency. Give the body a solid black
-    -- background (any winblend > 0 bleeds the buffer text behind the float
-    -- through, which reads as ghosting), and give the border a bg-less
-    -- clone keeping the theme's border fg.
-    local border = vim.api.nvim_get_hl(0, { name = "FloatBorder", link = false })
-    vim.api.nvim_set_hl(0, "TermFloatNormal", { bg = "#000000" })
-    vim.api.nvim_set_hl(0, "TermFloatBorder", { fg = border.fg })
-    vim.wo[float].winhighlight = "NormalFloat:TermFloatNormal,FloatBorder:TermFloatBorder"
+    -- TermOpen styles only the buffer's first window; re-shows land in a
+    -- fresh window that needs styling again.
+    style_term_window(float)
   else
     -- botright split = bottom-most, spanning the full width.
     vim.cmd("botright " .. math.floor(vim.o.lines * 0.3) .. "split")
     vim.api.nvim_win_set_buf(0, shell.buf)
+    style_term_window(vim.api.nvim_get_current_win())
   end
   if fresh then
     vim.fn.jobstart(vim.o.shell, { term = true })

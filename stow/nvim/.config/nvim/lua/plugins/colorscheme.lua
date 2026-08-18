@@ -35,7 +35,12 @@ return {
 
         -- Custom Highlights --
         colors = {}, -- Override default colors
-        highlights = {}, -- Override highlight groups
+        highlights = {
+            -- give the current line number a bg so it continues the
+            -- cursorline strip into the number column (onedark default
+            -- is fg-only)
+            CursorLineNr = { bg = "$bg1", fmt = "bold" },
+        }, -- Override highlight groups
 
         -- Plugins Config --
         diagnostics = {

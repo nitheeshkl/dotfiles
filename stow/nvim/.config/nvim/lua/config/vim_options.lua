@@ -84,6 +84,13 @@ vim.cmd("set writebackup")
 vim.cmd("set number") -- show absolute number on the current line
 vim.cmd("set relativenumber") -- show relative numbers on all other lines
 
+-- Cursor line: highlight both the text line and its line number.
+-- NOTE: onedark's CursorLine bg (#282c34, bg1) is an explicit color, so
+-- kitty renders the strip opaque over the transparent pane; register the
+-- hex in kitty's transparent_background_colors to make it translucent.
+vim.cmd("set cursorline")
+vim.cmd("set cursorlineopt=both")
+
 -- Search settings
 vim.cmd("set incsearch") -- search as characters are entered
 vim.cmd("set hlsearch") -- highlight search matches
