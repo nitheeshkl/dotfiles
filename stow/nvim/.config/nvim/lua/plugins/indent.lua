@@ -28,7 +28,9 @@ return {
     end)
 
     require("ibl").setup({
-      indent = { highlight = highlight },
+      -- │ (box-drawing light vertical) renders as a hairline — thinner than
+      -- the block glyphs (default ▎ quarter-block, ▏ eighth-block)
+      indent = { char = "│", highlight = highlight },
     })
   end,
 }
