@@ -48,8 +48,10 @@ mkdir -p "$LOCAL_BIN" "$SRC_DIR"
 # build-essential/cmake/gettext/ninja-build/unzip/curl: neovim build deps.
 # pkg-config/libssl-dev: common cargo build needs. ripgrep/fd-find/file:
 # runtime tools for telescope and yazi. git/stow: this repo itself.
+# python3-venv/python3-pip: mason installs pip-based tools (beautysh) into
+# a venv, which fails without them on stock Debian/Ubuntu.
 APT_PKGS=(git stow build-essential cmake ninja-build gettext unzip curl
-  pkg-config libssl-dev ripgrep fd-find file)
+  pkg-config libssl-dev ripgrep fd-find file python3-venv python3-pip)
 
 install_apt_packages() {
   local missing=()
@@ -89,6 +91,19 @@ install_rustup() {
 }
 
 # --------------------------------------------------- 3. nvm + node ----
+# nvm only puts node on PATH in shells that source it (interactive rc);
+# nvim launched outside one (zellij server started elsewhere, GUI) can't
+# see npm and mason's node-based packages fail to install. Symlink the
+# default toolchain into ~/.local/bin, which is on PATH everywhere.
+link_node() {
+  local node_path bin
+  node_path="$(nvm which default 2>/dev/null)" || return 0
+  bin="$(dirname "$node_path")"
+  [[ "$(readlink "$LOCAL_BIN/npm" 2>/dev/null)" == "$bin/npm" ]] && return
+  log "symlinking node/npm/npx -> $bin in $LOCAL_BIN"
+  ln -sf "$bin/node" "$bin/npm" "$bin/npx" "$LOCAL_BIN/"
+}
+
 install_node() {
   export NVM_DIR="$HOME/.nvm"
   if [[ ! -s "$NVM_DIR/nvm.sh" ]]; then
@@ -99,11 +114,13 @@ install_node() {
   source "$NVM_DIR/nvm.sh"
   if command -v node &>/dev/null && [[ $FORCE -eq 0 ]]; then
     skip "node already installed ($(node --version))"
+    link_node
     return
   fi
   log "installing Node LTS via nvm"
   nvm install --lts
   nvm alias default 'lts/*'
+  link_node
 }
 
 # ---------------------------------------------- 4. tree-sitter CLI ----
